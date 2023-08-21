@@ -28,4 +28,18 @@ export class AuthService {
       ),
     };
   }
+  verifyToken(token: string) {
+    try {
+      return this.jwtService.verify(token);
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+  parseJwt(token: string) {
+    return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+  }
+  async getUserByTokenData(token: string):Promise<User>{
+    const parsedTokenData = this.parseJwt(token);
+    return await this.userService.findOne(parsedTokenData.user.username)
+  }
 }
