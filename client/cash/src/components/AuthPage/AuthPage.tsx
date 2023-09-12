@@ -3,7 +3,9 @@ import React from "react";
 export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
   const currentTitle = type === "login" ? "Вход" : "Регистрация";
   return (
-    <div>
+   
+    <main className="main">
+   <div>
       <h1 className="main__header">{currentTitle}</h1>
       <form className="main__form">
         <div className="main__form-block">
@@ -33,5 +35,6 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
         </div>
       </form>
     </div>
+    </main>
   );
 };

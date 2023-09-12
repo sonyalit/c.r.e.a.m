@@ -3,6 +3,7 @@ import { useTheme } from "../../hooks";
 export const Header = () => {
   const { switchTheme, theme } = useTheme();
   return (
+    <body className="page">
     <header className="header">
       <div className="header__logo">
         <a className="header__logo-link" href="#">
@@ -23,5 +24,6 @@ export const Header = () => {
         Вход
       </button>
     </header>
+    </body>
   );
 };
