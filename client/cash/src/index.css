@@ -1,21 +1,3 @@
-@import './fonts.css';
-@import './global.css';
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-
 :root {
   --theme-back-color-header:#44d7ff;
   --theme-back-color-main:#84e3fd;
@@ -54,6 +36,7 @@ code {
 }
 .header__user-name {
   font-size: 36px;
+  margin: 0;
 }
 
 .button {
@@ -92,16 +75,20 @@ code {
 
 .main__header {
   font-size: 36px;
+  margin: 0;
+  text-align:start;
 }
 .main__form {
   display: flex;
   flex-direction: column;
 }
-
+.main__form-registration{
+  padding-top: 15px;
+  text-align: start;
+}
 .main__form-block {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 .main__form-input_log {
   min-height: 39px;
@@ -113,6 +100,7 @@ code {
   padding-left: 10px;
 }
 .main__form-input {
+  align-self: flex-start;
   padding: 10px 0 3px 0;
 }
 
@@ -159,10 +147,16 @@ code {
 .costs__list::-webkit-scrollbar {
   display: none;
 }
+.costs__list{
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 .costs__list-item {
   padding: 5px;
-  display: flex;
+  display: grid;
+ grid-template-columns: repeat(7,max-content);
   white-space: nowrap;
   border: 1px solid white;
   border-radius: 5px;
@@ -201,12 +195,12 @@ code {
   color: #f7f6f6;
 }
 .main__cancel_button {
-  background-color:  #CB4154;
+  background-color: #ff0000;
   color: #000000;
 }
 .main__special_button {
   min-width: 39px;
-  background-color: #CB4154;
+  background-color: #ff0000;
   margin-right: 5px;
 }
 

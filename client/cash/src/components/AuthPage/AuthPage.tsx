@@ -57,8 +57,8 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
     }
   };
   return (
-    <main className="main">
-      <div>
+    <body className="page">
+      <div className="main">
         <h1 className="main__header">{currentTitle}</h1>
         <form className="main__form" onSubmit={handleAuth}>
           <div className="main__form-block">
@@ -88,7 +88,7 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
           <button className="button main__exit_button" type="submit">
             {type == "login" ? "Войти" : "Зарегистрироваться"}
           </button>
-          <div>
+          <div className="main__form-registration">
             {type == "login" ? (
               <>
                 <label className="main__form-input">Еще нет аккаунта?</label>
@@ -110,6 +110,7 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
           </div>
         </form>
       </div>
-    </main>
+
+    </body>
   );
 };
