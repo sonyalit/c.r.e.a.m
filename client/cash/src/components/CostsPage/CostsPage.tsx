@@ -1,18 +1,14 @@
-import React from 'react';
-import CostForm from './CostForm';
-import CostList from './CostList';
+import React from "react";
+import CostForm from "./CostForm";
+import CostList from "./CostList";
 
 const CostsPage = () => {
-    return (
-        <div>
-            <body className='page'>
-            <main className='main'>
-            <CostForm/>
-            <CostList/>
-            </main>
-            </body>
-        </div>
-    );
+  return (
+    <main className="main">
+      <CostForm />
+      <CostList />
+    </main>
+  );
 };
 
 export default CostsPage;
