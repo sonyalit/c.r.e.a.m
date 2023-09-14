@@ -5,13 +5,17 @@ import { Header } from "./components/Header/Header";
 import CostsPage from "./components/CostsPage/CostsPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { $auth } from "./context/auth";
+import { $alert } from "./context/alert";
+import { Alert } from "./components/Alert/Alert";
 //todo add global color theme styles
 
 function App() {
   const isLoggedIn = useStore($auth);
+  const alert = useStore($alert);
   return (
     <div className="App">
       <Header />
+      <Alert props={alert} />
       <Routes>
         <Route
           path={"/"}
@@ -19,7 +23,7 @@ function App() {
         />
         <Route path={"/login"} element={<AuthPage type="login" />} />
         <Route
-          path={"/registartion"}
+          path={"/registration"}
           element={<AuthPage type="registration" />}
         />
       </Routes>

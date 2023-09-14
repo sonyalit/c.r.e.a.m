@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks";
-
+import { $username } from "../../context/auth";
+import { useStore } from "effector-react";
 export const Header = () => {
   const { switchTheme, theme } = useTheme();
+  const username = useStore($username);
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/login");
@@ -16,7 +18,7 @@ export const Header = () => {
           </Link>
         </div>
         <div className="header__user">
-          <p className="header__user-name">IVAN</p>
+          <p className="header__user-name">{username}</p>
         </div>
         <button
           className="button header__theme_button"
