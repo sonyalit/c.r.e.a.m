@@ -57,7 +57,6 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
     }
   };
   return (
-    <body className="page">
       <div className="main">
         <h1 className="main__header">{currentTitle}</h1>
         <form className="main__form" onSubmit={handleAuth}>
@@ -111,6 +110,6 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
         </form>
       </div>
 
-    </body>
+    
   );
 };

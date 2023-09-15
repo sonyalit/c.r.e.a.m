@@ -1,5 +1,4 @@
-import { setAlert } from "../context/alert"
-import { setAuth, setUserName } from "../context/auth"
+import { setAuth, setUsername } from "../context/auth"
 import api from "./axiosClient"
 
 export class AuthClient {
@@ -11,7 +10,7 @@ export class AuthClient {
             console.log(result)
             if (result.status === 200) {
                 setAuth(true)
-                setUserName(result.data.username)
+                setUsername(result.data.username)
                 localStorage.setItem('auth', JSON.stringify(result.data))
                 return true
             }

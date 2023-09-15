@@ -1,11 +1,28 @@
-import React from "react";
+import { useEffect } from "react";
 import CostForm from "./CostForm";
 import CostList from "./CostList";
+import { $costs, setCosts } from "../../context/costs";
+import { useStore } from "effector-react";
+import { getAuthDataFromLS } from "../../utils/auth";
+import { getCostsFx } from "../../api/costsClient";
 
 const CostsPage = () => {
+  const costs = useStore($costs);
+  const loadData = async () => {
+    const authData = getAuthDataFromLS();
+    const data = await getCostsFx({
+      url: "/cost",
+      token: authData.accessToken,
+    });
+    setCosts(data);
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <main className="main">
-      <CostForm />
+      <h1 className="main__header">Учёт моих расходов</h1>
+      <CostForm costs={costs} />
       <CostList />
     </main>
   );

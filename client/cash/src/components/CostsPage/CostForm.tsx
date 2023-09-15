@@ -1,12 +1,18 @@
-import React from "react";
-import { $totalPrice } from "../../context";
+import { useEffect } from "react";
+import { $totalPrice } from "../../context/costs";
 import { useStore } from "effector-react";
-const CostForm = () => {
+import { ICostFormProps } from "../../types";
+import { countTotalPrice } from "../../utils/costs";
+
+const CostForm = ({costs}:ICostFormProps) => {
   const totalPrice = useStore($totalPrice);
+  useEffect(()=>{
+    countTotalPrice(costs)
+  },[costs])
   return (
     <>
       <>
-        <h1 className="main__header">Учёт моих расходов</h1>
+       
         <form className="main__form-coast">
           <div className="main__form-block">
             <label className="main__form-input" htmlFor="where">

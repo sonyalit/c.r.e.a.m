@@ -13,7 +13,7 @@ function App() {
   const isLoggedIn = useStore($auth);
   const alert = useStore($alert);
   return (
-    <div className="App">
+    <div className="App page">
       <Header />
       <Alert props={alert} />
       <Routes>
