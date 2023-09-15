@@ -13,7 +13,6 @@ export const Header = ({theme, switchTheme}:IProps) => {
     navigate("/login");
   };
   return (
-    <body className="page">
       <header className="header">
         <div className="header__logo">
           <Link className="header__logo-link" to={"/"}>
@@ -38,6 +37,5 @@ export const Header = ({theme, switchTheme}:IProps) => {
           Вход
         </button>
       </header>
-    </body>
   );
 };
