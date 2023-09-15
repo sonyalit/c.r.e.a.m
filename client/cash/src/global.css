@@ -42,5 +42,6 @@ address{
 /* Скрываем scrollbar для IE, Edge и Firefox */
 .example {
   -ms-overflow-style: none;  /* IE и Edge */
-  scrollbar-width: none;  /* Firefox */
+  scrollbar-width: none; 
+ /* Firefox */
 }

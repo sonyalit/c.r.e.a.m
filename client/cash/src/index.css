@@ -1,14 +1,22 @@
 :root {
+  @media (prefers-color-scheme:dark){
+  --theme-back-color-header: pink; 
+  --theme-back-color-main:#f19cbb;
+  --alert-color-main:#84e3fd;
+  }
+  @media (prefers-color-scheme: light){
   --theme-back-color-header:#44d7ff;
   --theme-back-color-main:#84e3fd;
-  /* ................................. */
-  /* --theme-back-color-header: pink; */
-  /* --theme-back-color-main:#f19cbb; */
- 
+  --alert-color-main:#f19cbb; 
+  }
+
 }
 
+
+
 .page {
-  inline-size: 1200px;
+  max-inline-size: 1200px;
+  min-inline-size: 700px;
   block-size: 100%;
   margin: auto;
   /* padding-top: 50px; */
@@ -44,7 +52,7 @@
   font-family: inherit;
   padding: 10px;
   min-width: 100px;
-  max-width: 130px;
+  max-width: 155px;
   border-radius: 5px;
   border: none;
 }
@@ -60,7 +68,7 @@
 .button:hover {
   cursor: pointer;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
 }
 .button:active {
   background-color: #545050;
@@ -99,6 +107,17 @@
   border: none;
   padding-left: 10px;
 }
+
+/* подсветка alert */
+/* .main__form-input_log{                        
+  box-shadow: inset 0 0 15px var(--alert-color-main);
+
+}
+.main__form-input_log:focus-visible{
+  box-shadow: none;
+} */
+
+
 .main__form-input {
   align-self: flex-start;
   padding: 10px 0 3px 0;
@@ -111,6 +130,7 @@
 }
 
 .main__registration_button {
+  margin-left: 5px;
   margin-top: 10px;
   background-color: transparent;
   border: none;
