@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const CostItemRed = () => {
-    return (
-      <li className="costs__list-item">
+  return (
+    <li className="costs__list-item">
       <h2 className="costs__list-item_header">Магазин</h2>
       <input
         type="text"
@@ -15,16 +15,21 @@ const CostItemRed = () => {
         className="main__form-input_log"
         placeholder="Сумма трат"
       />
-
+      <select className="" id="category">
+        <option value="Инвестиции">Инвестиции</option>
+        <option value="Продукты">Инвестиции</option>
+      </select>
       <button className="button main__safe_button" type="button">
         Сохранить
       </button>
       <button className="button main__cancel_button" type="button">
         Отмена
       </button>
-      <button className="button main__special_button" type="button">X</button>
+      <button className="button main__special_button" type="button">
+        X
+      </button>
     </li>
-    );
+  );
 };
 
 export default CostItemRed;

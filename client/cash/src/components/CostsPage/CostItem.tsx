@@ -1,6 +1,7 @@
 import React from 'react';
+import { ICost } from '../../types';
 
-const CostItem = () => {
+const CostItem = ({cost}:{cost:ICost}) => {
     return (
         <li className="costs__list-item-ready">
         <div className="costs__list-item-block">
@@ -9,6 +10,7 @@ const CostItem = () => {
           <p className="costs__list-item_shop-time">
             <time>17.08.21</time>
           </p>
+          <p className="">Продукты</p>
         </div>
         <div className="costs__list-item-block">
           <p className="costs__list-item_shop-sum">Сумма: 12121</p>
