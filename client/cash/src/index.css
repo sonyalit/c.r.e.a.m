@@ -1,19 +1,24 @@
 :root {
-  @media (prefers-color-scheme:dark){
+  /* @media (prefers-color-scheme:dark){
+    --theme-back-color-header: pink; 
+    --theme-back-color-main:#f19cbb;
+    --alert-color-main:#84e3fd;
+    }
+    @media (prefers-color-scheme: light){
+    --theme-back-color-header:#44d7ff;
+    --theme-back-color-main:#84e3fd;
+    --alert-color-main:#f19cbb;  */
+}
+.light{
   --theme-back-color-header: pink; 
-  --theme-back-color-main:#f19cbb;
+  --theme-back-color-main:#f19cbb; 
   --alert-color-main:#84e3fd;
-  }
-  @media (prefers-color-scheme: light){
+}
+.dark{
   --theme-back-color-header:#44d7ff;
   --theme-back-color-main:#84e3fd;
   --alert-color-main:#f19cbb; 
-  }
-
 }
-
-
-
 .page {
   max-inline-size: 1200px;
   min-inline-size: 700px;

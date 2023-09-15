@@ -1,9 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useTheme } from "../../hooks";
 import { $username } from "../../context/auth";
 import { useStore } from "effector-react";
-export const Header = () => {
-  const { switchTheme, theme } = useTheme();
+interface IProps{
+  theme:string;
+  switchTheme:()=>void;
+}
+export const Header = ({theme, switchTheme}:IProps) => {
+  
   const username = useStore($username);
   const navigate = useNavigate();
   const handleClick = () => {
@@ -25,7 +28,7 @@ export const Header = () => {
           type="button"
           onClick={switchTheme}
         >
-          {theme === "light" ? "Go Barbie" : "Go Light"}
+          {theme === "light" ? "Go Barbie" : "Go Ken"}
         </button>
         <button
           className="button header__exit_button"
