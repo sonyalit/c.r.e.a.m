@@ -2,11 +2,14 @@ import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthClient } from "../../api/authClient";
 import { handleAlertMessage } from "../../utils/auth";
-
+import { useStore } from "effector-react";
+import { $alert } from "../../context/alert";
+import classNames from "classnames";
 export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
   const currentTitle = type === "login" ? "Вход" : "Регистрация";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const alert = useStore($alert)
   const navigate = useNavigate();
   const handleUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -66,7 +69,7 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
             </label>
             <input
               type="text"
-              className="main__form-input_log"
+              className={classNames("main__form-input_log", {'warning':alert.alertStatus==='warning'})} 
               id="user"
               value={username}
               onChange={handleUsername}
@@ -80,7 +83,7 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
               value={password}
               onChange={handlePassword}
               type="password"
-              className="main__form-input_log"
+              className={classNames("main__form-input_log", {'warning':alert.alertStatus==='warning'})}
               id="password"
             />
           </div>
