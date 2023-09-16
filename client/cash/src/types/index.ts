@@ -13,7 +13,7 @@ export interface ICostFormProps {
 export interface ICost {
   text: string;
   category: string;
-  price: number;
+  price: string;
   date: Date | string;
   _id?: number | string;
 }
@@ -22,6 +22,11 @@ export interface ICreateCost {
   url: string;
   token: string;
 }
+export interface IEditCost {
+    cost: ICost;
+    url: string;
+    token: string;
+  }
 export interface IDeleteCost {
   id: string;
   url: string;
@@ -41,4 +46,5 @@ export interface IAxiosErrorPayload {
   createCost?: Partial<ICreateCost>;
   getCosts?: Partial<IGetCosts>;
   deleteCost?: Partial<IDeleteCost>;
+  editCost?:Partial<IEditCost>;
 }

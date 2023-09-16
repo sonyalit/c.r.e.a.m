@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent,  useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { $totalPrice, createCost } from "../../context/costs";
 import { useStore } from "effector-react";
 import { ICostFormProps } from "../../types";
@@ -8,12 +8,12 @@ import { getAuthDataFromLS, handleAlertMessage } from "../../utils/auth";
 
 const CostForm = ({ costs }: ICostFormProps) => {
   const totalPrice = useStore($totalPrice);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [text, setText] = useState("");
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
-    setPrice(Number(e.target.value));
+    setPrice(e.target.value);
   };
   const handleItem = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -26,21 +26,39 @@ const CostForm = ({ costs }: ICostFormProps) => {
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!text||!category||!date||!price){
-      handleAlertMessage({alertStatus:'warning', alertText:'Заполните все поля'})
+    if (!text || !category || !date || !price) {
+      handleAlertMessage({
+        alertStatus: "warning",
+        alertText: "Заполните все поля",
+      });
       return;
     }
-    if(isNaN(+price)){
-      handleAlertMessage({alertStatus:'warning', alertText:'Стоимость должна быть представлена в числовом формате'})
+    if (isNaN(+price)) {
+      handleAlertMessage({
+        alertStatus: "warning",
+        alertText: "Стоимость должна быть представлена в числовом формате",
+      });
       return;
     }
     const token = getAuthDataFromLS();
-    const result  = await createCostFx({url:'/cost', cost:{text, category, date, price}, token:token.access_token})
-    if(!result){
-      return
+    const result = await createCostFx({
+      url: "/cost",
+      cost: { text, category, date, price },
+      token: token.access_token,
+    });
+    if (!result) {
+      return;
     }
     createCost(result);
-    handleAlertMessage({alertStatus:'success', alertText:'Успешно создано'})
+    setCategory("");
+    setDate("");
+    setPrice("");
+    setText("");
+    handleAlertMessage({
+      alertStatus: "success",
+      alertText: "Успешно создано",
+    });
+   
   };
   useEffect(() => {
     countTotalPrice(costs);
@@ -66,7 +84,7 @@ const CostForm = ({ costs }: ICostFormProps) => {
               Сколько было потрачено:
             </label>
             <input
-              type="number"
+              type="text"
               className="main__form-input_log"
               id="how"
               value={price}
@@ -95,7 +113,7 @@ const CostForm = ({ costs }: ICostFormProps) => {
               value={category}
               onChange={handleCategory}
             >
-               <option value="">Выберите категорию</option>
+              <option value="">Выберите категорию</option>
               <option value="Инвестиции">Инвестиции</option>
               <option value="Продукты">Продукты</option>
             </select>

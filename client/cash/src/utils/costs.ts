@@ -4,6 +4,6 @@ import { ICost } from "../types"
 export const countTotalPrice = (costs: ICost[]) => {
     if (costs === undefined) return
     setTotalPrice(
-        costs.reduce((acc, el) => acc + el.price, 0)
+        costs.reduce((acc, el) => acc + Number(el.price), 0)
     )
 }

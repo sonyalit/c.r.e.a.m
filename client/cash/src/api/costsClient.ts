@@ -1,5 +1,5 @@
 import { createEffect } from "effector";
-import { ICreateCost, IDeleteCost, IGetCosts, IRefreshToken } from "../types";
+import { ICreateCost, IDeleteCost, IEditCost, IGetCosts, IRefreshToken } from "../types";
 import api from "./axiosClient";
 import { removeUser } from "../utils/auth";
 import { handleAxiosError } from "../utils/errors";
@@ -16,7 +16,7 @@ export const createCostFx = createEffect(
       );
       return data;
     } catch (error) {
-      console.log(error);
+      handleAxiosError(error,{ type: "create" , createCost:{ cost }});
     }
   }
 );
@@ -28,6 +28,19 @@ export const deleteCostFx = createEffect(
       });
     } catch (error) {
         handleAxiosError(error,{ type: "delete" , deleteCost:{ id }});
+    }
+  }
+);
+export const editCostFx = createEffect(
+  async ({ url, token, cost}: IEditCost) => {
+    console.log(cost)
+    try {
+     const {data} = await api.patch(`${url}/${cost._id}`, {...cost},{
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return data
+    } catch (error) {
+        handleAxiosError(error,{ type: "edit" , editCost:{ cost }});
     }
   }
 );

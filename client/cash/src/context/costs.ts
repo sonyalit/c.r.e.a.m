@@ -5,7 +5,7 @@ const cost = createDomain();
 
 export const setCosts = cost.createEvent<ICost[]>();
 export const createCost = cost.createEvent<ICost>();
-export const updateCosts = cost.createEvent<ICost>();
+export const editCost = cost.createEvent<ICost>();
 export const deleteCost = cost.createEvent<string | number>();
 export const setTotalPrice = cost.createEvent<number>();
 
@@ -18,3 +18,4 @@ export const $costs = cost
   .on(setCosts, (_,costs ) => costs)
   .on(createCost, (state,cost)=>[...state,cost])
 .on(deleteCost, (state, cost)=>[...state.filter((el)=>el._id!==cost)])
+.on(editCost, (state, cost)=>[...state.map((el)=>el._id!==cost._id?el:{...cost})])
