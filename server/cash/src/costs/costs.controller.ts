@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Patch,
-  Delete, 
+  Delete,
   HttpCode,
   HttpStatus,
   Req,
@@ -31,27 +31,35 @@ export class CostsController {
     const token = req.token;
     const user = await this.authService.getUserByTokenData(token);
     const costs = await this.costsService.findAll(); // todo fix findAll by adding userId
-    const filteredCosts = costs.filter((cost)=>cost.userId === user._id.toString()) 
-    return res.send(filteredCosts)
+    const filteredCosts = costs.filter(
+      (cost) => cost.userId === user._id.toString(),
+    );
+    return res.send(filteredCosts);
   }
 
   @UseGuards(JWTGuard)
   @Post()
   @HttpCode(HttpStatus.OK)
-  async createCost(@Body() createCostDto:CreateCostDto, @Req() req) {
-     const user = await this.authService.getUserByTokenData(req.token)
-     return await this.costsService.create({...createCostDto, userId:user._id as string})
+  async createCost(@Body() createCostDto: CreateCostDto, @Req() req) {
+    const user = await this.authService.getUserByTokenData(req.token);
+    return await this.costsService.create({
+      ...createCostDto,
+      userId: user._id as string,
+    });
   }
   @UseGuards(JWTGuard)
-  @Patch(":id")
+  @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  async updateCost(@Body() updateCostDto:UpdateCostDto, @Param('id')id:string) {
-     return await this.costsService.update(updateCostDto, id)
+  async updateCost(
+    @Body() updateCostDto: UpdateCostDto,
+    @Param('id') id: string,
+  ) {
+    return await this.costsService.update(updateCostDto, id);
   }
   @UseGuards(JWTGuard)
-  @Delete(":id")
+  @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  async deleteCost( @Param('id')id:string) {
-     return await this.costsService.delete(id)
+  async deleteCost(@Param('id') id: string) {
+    return await this.costsService.delete(id);
   }
 }

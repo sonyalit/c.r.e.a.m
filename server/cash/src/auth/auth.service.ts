@@ -38,8 +38,8 @@ export class AuthService {
   parseJwt(token: string) {
     return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
   }
-  async getUserByTokenData(token: string):Promise<User>{
+  async getUserByTokenData(token: string): Promise<User> {
     const parsedTokenData = this.parseJwt(token);
-    return await this.userService.findOne(parsedTokenData.user.username)
+    return await this.userService.findOne(parsedTokenData.user.username);
   }
 }

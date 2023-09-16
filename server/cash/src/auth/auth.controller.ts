@@ -46,22 +46,32 @@ export class AuthController {
   }
   @UseGuards(RefreshJWTGuard)
   @Post('refresh')
-  async refreshToken(@Body() refreshTokenDto: RefreshTokenDto, @Res() res: Response) {
-   const validToken = this.authService.verifyToken(refreshTokenDto.refresh_token)
-   const user = await this.usersService.findOne(refreshTokenDto.username)
-   const access  = await this.authService.generateAccessToken(user)
-   if(validToken?.error){
-    if(validToken?.error === 'jwt expired'){
-      const refresh = await this.authService.generateRefreshToken(user._id as string)
-      res.statusCode = HttpStatus.OK
-      return res.send({...access,...refresh})
-    }else{
-      res.statusCode = HttpStatus.BAD_REQUEST
-      return res.send({error : validToken?.error})
+  async refreshToken(
+    @Body() refreshTokenDto: RefreshTokenDto,
+    @Res() res: Response,
+  ) {
+    const validToken = this.authService.verifyToken(
+      refreshTokenDto.refresh_token,
+    );
+    const user = await this.usersService.findOne(refreshTokenDto.username);
+    const access = await this.authService.generateAccessToken(user);
+    if (validToken?.error) {
+      if (validToken?.error === 'jwt expired') {
+        const refresh = await this.authService.generateRefreshToken(
+          user._id as string,
+        );
+        res.statusCode = HttpStatus.OK;
+        return res.send({ ...access, ...refresh });
+      } else {
+        res.statusCode = HttpStatus.BAD_REQUEST;
+        return res.send({ error: validToken?.error });
+      }
+    } else {
+      res.statusCode = HttpStatus.OK;
+      return res.send({
+        ...access,
+        refresh_token: refreshTokenDto.refresh_token,
+      });
     }
-   }else{
-    res.statusCode = HttpStatus.OK
-    return res.send({...access,refresh_token:refreshTokenDto.refresh_token})
-   }
   }
 }
