@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { $username } from "../../context/auth";
+import { $auth, $username } from "../../context/auth";
 import { useStore } from "effector-react";
+import { removeUser } from "../../utils/auth";
 interface IProps{
   theme:string;
   switchTheme:()=>void;
 }
 export const Header = ({theme, switchTheme}:IProps) => {
-  
+  const isLoggedIn = useStore($auth)
   const username = useStore($username);
   const navigate = useNavigate();
   const handleClick = () => {
@@ -29,13 +30,19 @@ export const Header = ({theme, switchTheme}:IProps) => {
         >
           {theme === "light" ? "Go Barbie" : "Go Ken"}
         </button>
-        <button
+       {!isLoggedIn? <button
           className="button header__exit_button"
           type="button"
           onClick={handleClick}
         >
           Вход
-        </button>
+        </button>: <button
+          className="button header__exit_button"
+          type="button"
+          onClick={removeUser}
+        >
+          Выйти
+        </button>}
       </header>
   );
 };
