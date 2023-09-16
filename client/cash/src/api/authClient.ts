@@ -1,4 +1,5 @@
 import { setAuth, setUsername } from "../context/auth"
+import { handleAxiosError } from "../utils/errors"
 import api from "./axiosClient"
 
 export class AuthClient {
@@ -16,7 +17,7 @@ export class AuthClient {
             }
             return false
         } catch (e) {
-            console.log(e)
+            handleAxiosError(e);
         }
     }
     static async registration(username: string, password: string) {
@@ -24,7 +25,6 @@ export class AuthClient {
             const result = await api.post('/auth/registration', {
                 username, password
             })
-            console.log(result)
             if (result.status === 201) {
                 setAuth(false)
                 localStorage.setItem('auth', JSON.stringify(result.data))
@@ -32,7 +32,7 @@ export class AuthClient {
             }
             return false
         } catch (e) {
-            console.log(e)
+            handleAxiosError(e);
         }
     }
 }
