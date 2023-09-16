@@ -1,12 +1,13 @@
-import React from "react";
 import CostItem from "./CostItem";
-import CostItemRed from "./CostItemEdit";
+import { ICost } from "../../types";
 
-const CostList = () => {
+const CostList = ({costs}:{costs:ICost[]}) => {
   return (
     <ul className="costs__list">
-      <CostItemRed />
-      <CostItem />
+      {costs.map((el, index)=>
+         <CostItem cost={el} index={index+1} key={el._id}/>
+        )}
+     
     </ul>
   );
 };

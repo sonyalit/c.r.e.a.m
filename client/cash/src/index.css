@@ -30,7 +30,9 @@
   font-size: 16px;
   background-color: #1b1919;
 }
-
+.alert{
+  background-color: var(--alert-color-main);
+}
 .header {
   padding: 15px 30px;
   display: flex;

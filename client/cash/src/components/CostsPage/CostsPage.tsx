@@ -12,7 +12,7 @@ const CostsPage = () => {
     const authData = getAuthDataFromLS();
     const data = await getCostsFx({
       url: "/cost",
-      token: authData.accessToken,
+      token: authData.access_token,
     });
     setCosts(data);
   };
@@ -23,7 +23,7 @@ const CostsPage = () => {
     <main className="main">
       <h1 className="main__header">Учёт моих расходов</h1>
       <CostForm costs={costs} />
-      <CostList />
+      <CostList costs={costs}/>
     </main>
   );
 };
