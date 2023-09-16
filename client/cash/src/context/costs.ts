@@ -17,3 +17,4 @@ export const $costs = cost
   .createStore<ICost[]>([])
   .on(setCosts, (_,costs ) => costs)
   .on(createCost, (state,cost)=>[...state,cost])
+.on(deleteCost, (state, cost)=>[...state.filter((el)=>el._id!==cost)])

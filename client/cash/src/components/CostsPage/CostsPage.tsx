@@ -23,7 +23,7 @@ const CostsPage = () => {
     <main className="main">
       <h1 className="main__header">Учёт моих расходов</h1>
       <CostForm costs={costs} />
-      <CostList costs={costs}/>
+     {!costs.length?<h1>Список расходов пуст</h1>:<CostList costs={costs}/>} 
     </main>
   );
 };

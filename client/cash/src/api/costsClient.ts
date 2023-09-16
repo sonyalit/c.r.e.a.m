@@ -1,5 +1,5 @@
 import { createEffect } from "effector";
-import { ICreateCost, IGetCosts, IRefreshToken } from "../types";
+import { ICreateCost, IDeleteCost, IGetCosts, IRefreshToken } from "../types";
 import api from "./axiosClient";
 import { removeUser } from "../utils/auth";
 import { handleAxiosError } from "../utils/errors";
@@ -20,6 +20,17 @@ export const createCostFx = createEffect(
     }
   }
 );
+export const deleteCostFx = createEffect(
+  async ({ url, token, id}: IDeleteCost) => {
+    try {
+     await api.delete(`${url}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (error) {
+        handleAxiosError(error,{ type: "delete" , deleteCost:{ id }});
+    }
+  }
+);
 export const getCostsFx = createEffect(async ({ url, token }: IGetCosts) => {
   try {
     const { data } = await api.get(url, {
@@ -27,9 +38,7 @@ export const getCostsFx = createEffect(async ({ url, token }: IGetCosts) => {
     });
     return data;
   } catch (error) {
-    handleAxiosError(
-      error, {type:'get'}
-    )
+    handleAxiosError(error, { type: "get" });
   }
 });
 export const refreshTokenFx = createEffect(
@@ -45,13 +54,10 @@ export const refreshTokenFx = createEffect(
             username,
           })
         );
-        return result.data.access_token
-      }
-      else{
+        return result.data.access_token;
+      } else {
         removeUser();
       }
-    } catch (error) {
-     
-    }
+    } catch (error) {}
   }
 );

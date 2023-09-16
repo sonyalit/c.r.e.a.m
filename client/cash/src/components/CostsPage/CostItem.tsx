@@ -1,7 +1,16 @@
 import React from 'react';
 import { ICost } from '../../types';
+import { deleteCostFx } from '../../api/costsClient';
+import { deleteCost } from '../../context/costs';
+import { getAuthDataFromLS, handleAlertMessage } from '../../utils/auth';
 
 const CostItem = ({cost, index}:{cost:ICost, index:number}) => {
+  const deleteItem=(id:string)=>{
+    const auth = getAuthDataFromLS()
+    deleteCostFx({url:'/cost',id, token:auth.access_token})
+    deleteCost(id)
+    handleAlertMessage({alertStatus:'sucess', alertText:'Успешно удалено'})
+  }
     return (
         <li className="costs__list-item-ready">
         <div className="costs__list-item-block">
@@ -18,7 +27,7 @@ const CostItem = ({cost, index}:{cost:ICost, index:number}) => {
           <button className="button main__safe_button" type="button">
             Изменить
           </button>
-          <button className="button main__special_button" type="button">X</button>
+          <button className="button main__special_button" type="button" onClick={()=>deleteItem(cost._id as string)}>X</button>
         </div>
       </li>
     );
