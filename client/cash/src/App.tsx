@@ -10,7 +10,6 @@ import { Alert } from "./components/Alert/Alert";
 import { getAuthDataFromLS, removeUser } from "./utils/auth";
 import { useEffect } from "react";
 import { useTheme } from "./hooks";
-//todo add global color theme styles
 
 function App() {
   const { switchTheme, theme } = useTheme();
@@ -34,7 +33,7 @@ function App() {
           path={"/"}
           element={!isLoggedIn ? <Navigate to={"/login"} /> : <CostsPage />}
         />
-        <Route path={"/login"} element={<AuthPage type="login" />} />
+        <Route path={"/login"} element={isLoggedIn? <Navigate to={"/"} /> :<AuthPage type="login" />} />
         <Route
           path={"/registration"}
           element={<AuthPage type="registration" />}

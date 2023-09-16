@@ -27,3 +27,14 @@ export interface IGetCosts {
     url:string;
     token:string;
 }
+export interface IRefreshToken {
+    url:string;
+    token:string;
+    username:string;
+}
+export interface IAxiosErrorPayload{
+    type:string;
+    createCost?:Partial<ICreateCost>;
+    getCosts?:Partial<IGetCosts>;
+
+}
