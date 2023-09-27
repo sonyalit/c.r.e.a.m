@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+
 }
 
 
@@ -18,6 +19,13 @@ li,
 blockquote {
   margin: 0;
   padding: 0;
+}
+
+
+body{
+  margin: 0 auto;
+  max-inline-size: 1200px;
+  min-inline-size: 375px;
 }
 
 a {

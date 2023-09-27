@@ -84,7 +84,7 @@ const CostForm = ({ costs }: ICostFormProps) => {
               Сколько было потрачено:
             </label>
             <input
-              type="text"
+              type="number"
               className="main__form-input_log"
               id="how"
               value={price}
@@ -109,13 +109,13 @@ const CostForm = ({ costs }: ICostFormProps) => {
             </label>
             <select
               className=""
-              id="category"
+              id="main__form-select"
               value={category}
               onChange={handleCategory}
             >
-              <option value="">Выберите категорию</option>
-              <option value="Инвестиции">Инвестиции</option>
-              <option value="Продукты">Продукты</option>
+              <option className="main__form-select-option" value="">Выберите категорию</option>
+              <option  className="main__form-select-option" value="Инвестиции">Инвестиции</option>
+              <option className="main__form-select-option" value="Продукты">Продукты</option>
             </select>
           </div>
           <button className="button main__exit_button" type="submit">

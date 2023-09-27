@@ -9,8 +9,8 @@ export const handleAxiosError = async (
   payload: IAxiosErrorPayload | null = null
 ) => {
   const errorMessage =
-    ((error as AxiosError).response?.data as { message: string }).message ||
-    ((error as AxiosError).response?.data as { error: string }).error;
+    ((error as AxiosError).response?.data as { message: string })?.message ||
+    ((error as AxiosError).response?.data as { error: string })?.error;
   if (errorMessage) {
     if (errorMessage === "jwt expired") {
       const payloadData = payload as IAxiosErrorPayload;

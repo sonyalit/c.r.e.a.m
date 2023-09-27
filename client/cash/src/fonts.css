@@ -1,8 +1,9 @@
 @font-face {
   font-family: RobotoSlab;
   src:
-    url(./fonts/RobotoSlab-VariableFont_wght.ttf) format('ttf'),
-    url(./fonts/RobotoSlab-VariableFont_wght.woff) format('wff');
+
+    url(./fonts/RobotoSlab-VariableFont_wght.ttf) format('truetype'),
+    url(./fonts/RobotoSlab-VariableFont_wght.woff) format('woff');
   font-weight: 400;
 
 }
