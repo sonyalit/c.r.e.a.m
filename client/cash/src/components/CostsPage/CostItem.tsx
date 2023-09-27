@@ -79,7 +79,7 @@ const CostItem = ({ cost, index }: { cost: ICost; index: number }) => {
     setEdit(false);
   };
   return (
-    <li className="costs__list-item-ready">
+    <li className={!edit?"costs__list-item-ready":"costs__list-item"}>
       {!edit ? (
         <>
           <div className="costs__list-item-block">
