@@ -35,7 +35,7 @@ export const Header = ({ theme, switchTheme }: IProps) => {
           type="button"
           onClick={switchTheme}
         >
-          {theme === "light" ? "Go Barbie" : "Go Ken"}
+          {theme === "light" ? "Go Ken" : "Go Barbie"}
         </button>
         {!isLoggedIn ? (
           <button
