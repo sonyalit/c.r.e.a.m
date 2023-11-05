@@ -26,14 +26,19 @@ function App() {
   }, []);
   return (
     <div className={`App page ${theme}`}>
-      <Header theme={theme} switchTheme={switchTheme}/>
-      <Alert props={alert} />
+      <Header theme={theme} switchTheme={switchTheme} />
+      {alert.alertStatus !== "" && <Alert props={alert} />}
       <Routes>
         <Route
           path={"/"}
           element={!isLoggedIn ? <Navigate to={"/login"} /> : <CostsPage />}
         />
-        <Route path={"/login"} element={isLoggedIn? <Navigate to={"/"} /> :<AuthPage type="login" />} />
+        <Route
+          path={"/login"}
+          element={
+            isLoggedIn ? <Navigate to={"/"} /> : <AuthPage type="login" />
+          }
+        />
         <Route
           path={"/registration"}
           element={<AuthPage type="registration" />}
