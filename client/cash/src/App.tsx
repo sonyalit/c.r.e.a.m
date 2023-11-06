@@ -10,7 +10,6 @@ import { Alert } from "./components/Alert/Alert";
 import { getAuthDataFromLS, removeUser } from "./utils/auth";
 import { useEffect } from "react";
 import { useTheme } from "./hooks";
-import api from './api/tinkoffClient'
 import InvestPage from "./components/InvestPage/InvestPage";
 import StatsPage from "./components/StatsPage/StatsPage";
 
@@ -27,10 +26,7 @@ function App() {
       setUsername(auth.username);
     }
   }, []);
-  const tinkoff = async() =>{
-    const response = await api.post('/tinkoff.public.invest.api.contract.v1.SandboxService/OpenSandboxAccount',{}, {headers:{Authorization:`Bearer ${process.env.REACT_APP_TINKOFF_TOKEN}`}})
-    console.log(response)
-  }
+ 
   useEffect(() => {
     const auth = getAuthDataFromLS();
     if (!auth || !auth.access_token || !auth.refresh_token) {
@@ -39,7 +35,6 @@ function App() {
       setAuth(true);
       setUsername(auth.username);
     }
-    tinkoff()
   }, []);
   return (
     <div className={`App page ${theme}`}>
