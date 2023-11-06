@@ -10,6 +10,9 @@ import { Alert } from "./components/Alert/Alert";
 import { getAuthDataFromLS, removeUser } from "./utils/auth";
 import { useEffect } from "react";
 import { useTheme } from "./hooks";
+import api from './api/tinkoffClient'
+import InvestPage from "./components/InvestPage/InvestPage";
+import StatsPage from "./components/StatsPage/StatsPage";
 
 function App() {
   const { switchTheme, theme } = useTheme();
@@ -23,6 +26,20 @@ function App() {
       setAuth(true);
       setUsername(auth.username);
     }
+  }, []);
+  const tinkoff = async() =>{
+    const response = await api.post('/tinkoff.public.invest.api.contract.v1.SandboxService/OpenSandboxAccount',{}, {headers:{Authorization:`Bearer ${process.env.REACT_APP_TINKOFF_TOKEN}`}})
+    console.log(response)
+  }
+  useEffect(() => {
+    const auth = getAuthDataFromLS();
+    if (!auth || !auth.access_token || !auth.refresh_token) {
+      removeUser();
+    } else {
+      setAuth(true);
+      setUsername(auth.username);
+    }
+    tinkoff()
   }, []);
   return (
     <div className={`App page ${theme}`}>
@@ -42,6 +59,14 @@ function App() {
         <Route
           path={"/registration"}
           element={<AuthPage type="registration" />}
+        />
+        <Route
+          path={"/invest"}
+          element={<InvestPage />}
+        />
+        <Route
+          path={"/stats"}
+          element={<StatsPage />}
         />
       </Routes>
     </div>

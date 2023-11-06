@@ -116,6 +116,10 @@ const CostForm = ({ costs }: ICostFormProps) => {
               <option className="main__form-select-option" value="">Выберите категорию</option>
               <option  className="main__form-select-option" value="Инвестиции">Инвестиции</option>
               <option className="main__form-select-option" value="Продукты">Продукты</option>
+              <option className="main__form-select-option" value="Здоровье">Здоровье</option>
+              <option className="main__form-select-option" value="Развлечения">Развлечения</option>
+              <option className="main__form-select-option" value="Коммунальные услуги">Коммунальные услуги</option>
+              <option className="main__form-select-option" value="Обязательные платежи">Обязательные платежи</option>
             </select>
           </div>
           <button className="button main__exit_button" type="submit">

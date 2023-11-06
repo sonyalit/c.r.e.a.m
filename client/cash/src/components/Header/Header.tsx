@@ -22,8 +22,10 @@ export const Header = ({ theme, switchTheme }: IProps) => {
     <header className="header">
       <div className="header__logo">
         <Link className="header__logo-link" to={"/"}>
-
-          {/* Costs App */}
+        </Link>
+        <Link className="header__logo-link-invest" to={"/invest"}>
+        </Link>
+        <Link className="header__logo-link-stats" to={"/stats"}>
         </Link>
       </div>
       <div className="header__user">
