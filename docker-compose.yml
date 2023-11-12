@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  nest:
+    build:
+      context: ./server/cash
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./server/cash/.env
+  react:
+    build:
+      context: ./client/cash
+      dockerfile: Dockerfile
+    depends_on:
+      - nest
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/cash/.env
