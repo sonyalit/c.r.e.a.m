@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { formatMoney } from "../../utils/invest";
 import { getInstrumentByUid } from "../../api/tinkoffClient";
+import { IPortfolio, IShares } from "./types";
 interface IProps {
-  portfolio: any;
+  portfolio: IPortfolio;
 }
+
 const Shares = ({ portfolio }: IProps) => {
-  const [shares, setShares] = useState([]);
+  const [shares, setShares] = useState<IShares[]>([]);
   const formatShares = async () => {
     getShares();
   };

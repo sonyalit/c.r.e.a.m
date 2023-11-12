@@ -1,5 +1,7 @@
+import { IMoney } from "../components/InvestPage/types";
+
 export const formatMoney = (
-    moneyObject: { units: number; nano: number },
+    moneyObject: IMoney,
     currency = "rub"
   ) => {
     return (

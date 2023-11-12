@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatMoney } from '../../utils/invest';
+import { IPortfolio } from './types';
 interface IProps {
-    portfolio:any;
+    portfolio:IPortfolio;
 }
+
 const Currency = ({portfolio}:IProps) => {
-    const [currencies, setCurrencies] = useState([]);
+    const [currencies, setCurrencies] = useState<string[]>([]);
     const getCurrencies = () => {
         const moneyValues = portfolio?.positions
           ?.filter(({ instrumentType }) => instrumentType === "currency")
