@@ -1,22 +1,33 @@
-import { useEffect } from 'react';
-import api from './../../api/tinkoffClient'
+import { useStore } from "effector-react";
+import { useEffect } from "react";
+import { $portfolio, setPortfolio } from "../../context/invest";
+import { getPortfolioFx } from "../../api/tinkoffClient";
+import Currency from "./Currency";
+import Shares from "./Shares";
+import { formatMoney } from "../../utils/invest";
 
 const InvestPage = () => {
-    const tinkoff = async() =>{
-        const response = await api.post('/tinkoff.public.invest.api.contract.v1.OperationsService/GetPortfolio',{
-            "accountId": process.env.REACT_APP_TINKOFF_ACCOUNT_ID,
-            "currency": "RUB"
-          }, {headers:{Authorization:`Bearer ${process.env.REACT_APP_TINKOFF_TOKEN}`}})
-        console.log(response)
-      }
-      useEffect(()=>{
-        tinkoff()
-      },[])
-    return (
-        <main className="main">
-        <h1 className="main__header">Мои инвестиции</h1>
-        </main>
-    );
+  const portfolio = useStore($portfolio);
+
+  const loadData = async () => {
+    const data = await getPortfolioFx();
+    setPortfolio(data);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+  
+  return (
+    <main className="main">
+      <h1 className="main__header">Мои инвестиции</h1>
+      <h2>
+        Общая стоимость портфеля {formatMoney(portfolio?.totalAmountPortfolio)}
+      </h2>
+      <Currency portfolio={portfolio} />
+      <Shares portfolio={portfolio} />
+    </main>
+  );
 };
 
 export default InvestPage;
