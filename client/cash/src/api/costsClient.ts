@@ -59,7 +59,7 @@ export const refreshTokenFx = createEffect(
     try {
       const result = await api.post(url, { refresh_token: token, username });
 
-      if (result.status == 200) {
+      if (result.status === 200) {
         localStorage.setItem(
           "auth",
           JSON.stringify({

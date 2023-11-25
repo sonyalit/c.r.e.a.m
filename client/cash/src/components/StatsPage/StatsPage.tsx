@@ -12,15 +12,15 @@ const StatsPage = () => {
   const pie = useRef(null);
   const [pieData, setPieData] = useState<TPie[]>([]);
   const costs = useStore($costs);
-  const loadData = async () => {
-    const authData = getAuthDataFromLS();
-    const data = await getCostsFx({
-      url: "/cost",
-      token: authData.access_token,
-    });
-    setCosts(data);
-  };
   useEffect(() => {
+    const loadData = async () => {
+      const authData = getAuthDataFromLS();
+      const data = await getCostsFx({
+        url: "/cost",
+        token: authData.access_token,
+      });
+      setCosts(data);
+    };
     loadData();
   }, []);
   useEffect(() => {
@@ -36,42 +36,42 @@ const StatsPage = () => {
       })
     );
   }, [costs]);
-  const getOption = () => {
-    const option = {
-      legend: {
-        left: "left",
-        orient: "vertical",
-        textStyle: {
-          fontSize: 12,
-          fontFamily: "RobotoSlab",
-        },
-      },
-      series: [
-        {
-          type: "pie",
-          radius: "65%",
-          data: pieData?.map((el) => ({
-            value: el.sum,
-            name: el.category,
-            label: {
-              formatter: function (d: { value: number; name: string }) {
-                const formatterValue = d.value.toFixed(2);
-                return (
-                  new Intl.NumberFormat("ru-RU", {
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                  }).format(Number(formatterValue)) + " ₽"
-                );
-              },
-              fontSize: 10,
-            },
-          })),
-        },
-      ],
-    };
-    return option;
-  };
   useEffect(() => {
+    const getOption = () => {
+      const option = {
+        legend: {
+          left: "left",
+          orient: "vertical",
+          textStyle: {
+            fontSize: 12,
+            fontFamily: "RobotoSlab",
+          },
+        },
+        series: [
+          {
+            type: "pie",
+            radius: "65%",
+            data: pieData?.map((el) => ({
+              value: el.sum,
+              name: el.category,
+              label: {
+                formatter: function (d: { value: number; name: string }) {
+                  const formatterValue = d.value.toFixed(2);
+                  return (
+                    new Intl.NumberFormat("ru-RU", {
+                      maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
+                    }).format(Number(formatterValue)) + " ₽"
+                  );
+                },
+                fontSize: 10,
+              },
+            })),
+          },
+        ],
+      };
+      return option;
+    };
     const pieChart = echarts.init(pie.current, null, {
       renderer: "svg",
     });

@@ -88,10 +88,10 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
             />
           </div>
           <button className="button main__exit_button" type="submit">
-            {type == "login" ? "Войти" : "Зарегистрироваться"}
+            {type === "login" ? "Войти" : "Зарегистрироваться"}
           </button>
           <div className="main__form-registration">
-            {type == "login" ? (
+            {type === "login" ? (
               <>
                 <label className="main__form-input">Еще нет аккаунта?</label>
                 <Link

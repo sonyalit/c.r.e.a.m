@@ -7,19 +7,19 @@ interface IProps {
 
 const Currency = ({portfolio}:IProps) => {
     const [currencies, setCurrencies] = useState<string[]>([]);
-    const getCurrencies = () => {
-        const moneyValues = portfolio?.positions
-          ?.filter(({ instrumentType }) => instrumentType === "currency")
-          ?.map((el) => formatMoney(el.quantity, el.currencyPrice?.currency));
-        setCurrencies(moneyValues);
-      };
-      useEffect(()=>{
+    useEffect(()=>{
+        const getCurrencies = () => {
+            const moneyValues = portfolio?.positions
+              ?.filter(({ instrumentType }) => instrumentType === "currency")
+              ?.map((el) => formatMoney(el.quantity, el.currencyPrice?.currency));
+            setCurrencies(moneyValues);
+          };
         getCurrencies()
-      },[])
+      },[portfolio])
     return (
         <><h3>Валюта</h3><div>
             {currencies?.map((el) => (
-                <p>{el}</p>
+                <p key={el}>{el}</p>
             ))}
         </div></>
     );
