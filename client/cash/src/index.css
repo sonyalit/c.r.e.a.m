@@ -338,9 +338,12 @@ justify-self: end;
   display: flex;
   gap: 15px;
 }
-
-
-
+ .positive{
+  color: rgb(30, 244, 30);
+ }
+ .negative{
+  color:red;
+ }
 
 
 @media (width < 768px) {

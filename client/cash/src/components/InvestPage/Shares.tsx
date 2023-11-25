@@ -2,56 +2,59 @@ import React, { useEffect, useState } from "react";
 import { formatMoney } from "../../utils/invest";
 import { getInstrumentByUid } from "../../api/tinkoffClient";
 import { IPortfolio, IShares } from "./types";
+import classNames from "classnames";
 interface IProps {
   portfolio: IPortfolio;
 }
 
 const Shares = ({ portfolio }: IProps) => {
   const [shares, setShares] = useState<IShares[]>([]);
-  const formatShares = async () => {
-    getShares();
-  };
-
+  
   const getTicker = async (uid: string) => {
     const data = await getInstrumentByUid(uid);
     return { ticker: data?.instrument.ticker, name: data?.instrument.name };
   };
-  const getShares = async () => {
-    const shares = portfolio?.positions
-      ?.filter(({ instrumentType }) => instrumentType === "share")
-      ?.map((el) => ({
-        totalPrice: formatMoney(
-          el.averagePositionPrice,
-          el.averagePositionPrice.currency
-        ),
-        quantity: el.quantity.units,
-        uid: el.instrumentUid,
-        yield: formatMoney(el.expectedYield),
-      }));
-    const sharesWithTicker = await Promise.all(
-      shares?.map(async (el) => {
-        const data = await getTicker(el.uid);
-        return { ...el, ...data };
-      })
-    );
-    setShares(sharesWithTicker);
-  };
   useEffect(() => {
-    formatShares();
-  }, []);
+    const getShares = async () => {
+      const shares = portfolio?.positions
+        ?.filter(({ instrumentType }) => instrumentType === "share")
+        ?.map((el) => ({
+          totalPrice: formatMoney(
+            el.averagePositionPrice,
+            el.averagePositionPrice.currency
+          ),
+          quantity: el.quantity.units,
+          uid: el.instrumentUid,
+          yield: formatMoney(el.expectedYield),
+        }));
+        const getSharesTickers = shares?.map(async (el) => {
+          const data = await getTicker(el.uid);
+          return { ...el, ...data };
+        })||[]
+      const sharesWithTicker = await Promise.all(
+        getSharesTickers
+      );
+      setShares(sharesWithTicker);
+    };
+    getShares();
+  }, [portfolio]);
   return (
     <>
       <h3>Акции</h3>
-      <div>
+      <table>
         {shares?.map((el) => (
-          <div key={el.ticker}>
-            <p>{el.ticker}</p>
-            <p>{el.name}</p>
-            <p>{el.totalPrice}</p>
-            <p>{el.yield}</p>
-          </div>
+          <tr key={el.ticker}>
+            <td>{el.ticker}</td>
+            <td>{el.name}</td>
+            <td>{el.totalPrice}</td>
+            <td 
+            className={classNames({positive:Number(el.yield.slice(0,-2))>0},{negative:Number(el.yield.slice(0,-2))<0})}
+            >
+              {el.yield}
+              </td>
+          </tr>
         ))}
-      </div>
+      </table>
     </>
   );
 };
