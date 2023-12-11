@@ -23,7 +23,7 @@ blockquote {
 
 
 body{
-  margin: 0 auto;
+  margin: 0 0 auto;
   max-inline-size: 1200px;
   min-inline-size: 375px;
 }
