@@ -73,6 +73,10 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
               id="user"
               value={username}
               onChange={handleUsername}
+              // required
+              // minLength= {3}
+              // maxLength={10}
+
             />
           </div>
           <div className="main__form-block">
@@ -85,6 +89,9 @@ export const AuthPage = ({ type }: { type: "login" | "registration" }) => {
               type="password"
               className={classNames("main__form-input_log", {'warning':alert.alertStatus==='warning'})}
               id="password"
+              // required
+              // minLength= {8}
+              // maxLength={30}
             />
           </div>
           <button className="button main__exit_button" type="submit">
